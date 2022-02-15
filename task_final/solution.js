@@ -34,6 +34,26 @@
 // }
 
 function sendRequest(name, phone, address, goods, sum) {
+    let data = {client:'',order: {}, goods: []};
+ // let data = {client, order: {address, sum}, goods: [{}]};
+    data.client = name+' '+phone; //name+' '+phone; ///'Иван';
+
+    data.order.address = 'ул. '+address.street+', дом '+address.house+', '+address.entrance+' подъезд, '+address.floor+' этаж, кв '+address.flat; //street, house, entrance, floor, flat
+    data.order.sum = sum; 
+
+    let countOfGoods = goods.length; //длина массива 
+
+    for (let i = 0; i < countOfGoods; i += 1) { //пока не перебрали все позиции и меньше длины
+        data.goods.push({title: goods[i].title, count: goods[i].count}); //добавляем в конец  массива названия позиций +количество  goods.push({title:"кола", count:3})
+          }
+ 
+    let jsonData = JSON.stringify({data:data});
+
+    return jsonData;
+}
+
+/*
+function sendRequest(name, phone, address, goods, sum) {
     let data = {goods: [], order: {}};
 
     let countOfGoods = goods.length;
@@ -50,4 +70,4 @@ function sendRequest(name, phone, address, goods, sum) {
     let jsonData = JSON.stringify(data);
 
     return jsonData;
-}
+}*/ 
